@@ -16,18 +16,20 @@ public class MessagingQueueProducer implements  Runnable{
     private Identifier identifier;
     private MessagingSession session;
     private boolean keepRunning = true;
+    private Object data;
     Logger logger = LoggerFactory.getLogger(MessagingQueueProducer.class);
 
 
     public void run() {
         while(keepRunning) {
-            session.publishMessage(identifier, System.nanoTime());
+            session.publishMessage(identifier, this.data);
         }
     }
 
-    public MessagingQueueProducer(Identifier identifier, MessagingSession session) {
+    public MessagingQueueProducer(Identifier identifier, MessagingSession session,Object publishedData) {
         this.identifier = identifier;
         this.session = session;
+        this.data = publishedData;
     }
 
     public void setKeepRunning(boolean keepRunning) {
