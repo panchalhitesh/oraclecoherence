@@ -34,7 +34,7 @@ import static org.testng.Assert.assertTrue;
  * Unit test for simple MessagingQueueProducerConsumerTest.
  */
 public class MessagingQueueProducerConsumerTest {
-
+    Logger logger = LoggerFactory.getLogger(MessagingQueueProducerConsumerTest.class);
     private String serverCacheConfig = "coherence-messagingpattern-test-cache-config.xml";
     private String clientCacheConfig = "coherence-messagingpattern-test-client-cache-config.xml";
     private String commonPofConfig = "coherence-messagingpattern-test-pof-config.xml";
@@ -48,11 +48,12 @@ public class MessagingQueueProducerConsumerTest {
     CoherenceClusterBuilder clusterBuilder;
     CoherenceCluster cluster;
     String QUEUE_NAME = "test.queue";
-    Logger logger = LoggerFactory.getLogger(MessagingQueueProducerConsumerTest.class);
+
     int noOfConsumedMessages = 0;
     Long publishedObject,consumedObject;
     @BeforeClass
     public void initializeTestEnvironment(){
+        logger.info("Starting Cluster Test Environment");
         availablePorts = platform.getAvailablePorts();
         Capture<Integer> clusterPort = new Capture<Integer>(availablePorts);
         Capture<Integer> extendProxyNodePort = new Capture<Integer>(availablePorts);

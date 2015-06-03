@@ -28,7 +28,6 @@ public class MessaginQueueConsumer extends Observable implements Runnable{
 
     private void setConsumedObject(Object consumedObject) {
         this.consumedObject = consumedObject;
-        logger.info("Latency in Nanos {}",(System.nanoTime() - ((Long)consumedObject)));
         setChanged();
         notifyObservers(consumedObject);
     }
